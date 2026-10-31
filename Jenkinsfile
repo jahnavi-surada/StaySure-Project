@@ -46,14 +46,14 @@ pipeline {
         }
 
         stage('Deploy') {
-            steps {
-                bat 'kubectl apply -f deployment.yaml'
-                bat 'kubectl apply -f service.yaml'
-                bat 'kubectl rollout status deployment/staysure-deployment --timeout=120s'
-            }
-        }
+    steps {
+        bat '"C:\\Users\\Jahnavi\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\kubectl.exe" config current-context'
+        bat '"C:\\Users\\Jahnavi\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\kubectl.exe" get nodes'
+        bat '"C:\\Users\\Jahnavi\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\kubectl.exe" apply -f deployment.yaml'
+        bat '"C:\\Users\\Jahnavi\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\kubectl.exe" apply -f service.yaml'
+        bat '"C:\\Users\\Jahnavi\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\kubectl.exe" rollout status deployment/staysure-deployment --timeout=120s'
     }
-
+}
     post {
         success {
             echo 'StaySure pipeline completed successfully!'
