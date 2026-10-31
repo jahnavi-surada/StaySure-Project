@@ -1,3 +1,4 @@
+
 pipeline {
     agent any
 
@@ -30,6 +31,30 @@ pipeline {
             steps {
                 bat 'npm run build'
             }
+        }
+
+        stage('Test') {
+            steps {
+                bat '''
+                if not exist .next\\BUILD_ID (
+                    echo Build verification failed!
+                    exit /b 1
+                )
+                echo Build verification successful!
+                '''
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'StaySure pipeline completed successfully!'
+        }
+        failure {
+            echo 'StaySure pipeline failed. Check the console output.'
+        }
+        always {
+            echo 'Pipeline execution finished.'
         }
     }
 }
