@@ -20,6 +20,12 @@ pipeline {
             }
         }
 
+        stage('Database Migration') {
+            steps {
+                bat 'npx prisma migrate deploy'
+            }
+        }
+
         stage('Build') {
             steps {
                 bat 'npm run build'
