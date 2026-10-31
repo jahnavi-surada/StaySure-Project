@@ -44,14 +44,15 @@ pipeline {
                 '''
             }
         }
+
+        stage('Deploy') {
+            steps {
+                bat 'kubectl apply -f deployment.yaml'
+                bat 'kubectl apply -f service.yaml'
+                bat 'kubectl rollout status deployment/staysure-deployment --timeout=120s'
+            }
+        }
     }
-	stage('Deploy') {
-	    steps {
-        	bat 'kubectl apply -f deployment.yaml'
-        	bat 'kubectl apply -f service.yaml'
-        	bat 'kubectl rollout status deployment/staysure-deployment --timeout=120s'
-	    	}
-	}
 
     post {
         success {
