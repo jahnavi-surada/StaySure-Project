@@ -40,3 +40,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 prisma/*.db
+prisma/dev.db-journal
+screenshots/
+staysure-app.tar
