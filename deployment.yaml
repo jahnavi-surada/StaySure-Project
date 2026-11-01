@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: staysure-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: staysure
+  template:
+    metadata:
+      labels:
+        app: staysure
+    spec:
+      containers:
+        - name: staysure-container
+          image: jahnavi1204/staysure-app:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          env:
+            - name: NEXTAUTH_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: staysure-secret
+                  key: NEXTAUTH_SECRET
+            - name: NEXTAUTH_URL
+              value: "http://localhost:30080"
